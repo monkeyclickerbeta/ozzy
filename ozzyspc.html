@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ozzy's PC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #0d1117 50%, #0a0e1a 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .grid-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 174, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 174, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 5em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #2563eb, #3b82f6, #60a5fa, #2563eb);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .skills-container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(30, 58, 138, 0.3);
+            border-radius: 20px;
+            padding: 30px 40px;
+            min-width: 200px;
+            transition: all 0.4s ease;
+            animation: floatUp 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .skill-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .skill-card:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(30, 58, 138, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .skill-card:hover {
+            transform: scale(1.1) translateY(-10px);
+            border-color: rgba(30, 58, 138, 0.8);
+            box-shadow: 0 20px 60px rgba(30, 58, 138, 0.4);
+        }
+
+        .skill-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: rotate 4s linear infinite;
+            display: inline-block;
+            color: #ffffff;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .skill-name {
+            font-size: 1.5em;
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .skill-status {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+
+        .learning-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #60a5fa, #3b82f6);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(96, 165, 250, 0); }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(30, 58, 138, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px) scale(1); opacity: 0; }
+        }
+
+        .time-display {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-size: 2em;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+            animation: fadeIn 3s ease-in;
+        }
+
+        .footer-text {
+            position: absolute;
+            bottom: 40px;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.5);
+            animation: fadeIn 4s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="grid-background"></div>
+
+    <div class="time-display" id="time"></div>
+
+    <div class="container">
+        <h1>Ozzy's Windows 10 PC</h1>
+        
+        <div class="skills-container">
+            <div class="skill-card">
+                <div class="skill-icon">&lt;/&gt;</div>
+                <div class="skill-name">HTML</div>
+                <div class="skill-status">Mastered</div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">{ }</div>
+                <div class="skill-name">CSS</div>
+                <div class="skill-status">Mastered</div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">JS</div>
+                <div class="skill-name">JavaScript</div>
+                <div class="skill-status">Currently Learning</div>
+                <div class="learning-badge">in Progress</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-text">Website Made By Ozzy</div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Update time for Central Time (Oklahoma City)
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                timeZone: 'America/Chicago', 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true
+            };
+            const timeString = now.toLocaleTimeString('en-US', options);
+            document.getElementById('time').textContent = timeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
